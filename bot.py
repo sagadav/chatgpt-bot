@@ -2,13 +2,13 @@ from time import sleep
 from gpt4free import usesless
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler
-
+from os import getenv
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
 
-app = ApplicationBuilder().token('').build()
+app = ApplicationBuilder().token(getenv("tg_token")).build()
 from gpt4free import theb
 message_id = {}
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
