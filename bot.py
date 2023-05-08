@@ -9,8 +9,11 @@ async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 app = ApplicationBuilder().token(getenv("tg_token")).build()
+
 from gpt4free import theb
 message_id = {}
+
+print("hello")
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = update.effective_user.id
     # user_parent_msg_id = message_id[user_id] if user_id in message_id else ""
@@ -42,7 +45,5 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             print("text: ", text, "prev: ", msg.text)
 
 app.add_handler(MessageHandler(None, echo))
-
-app.run_polling()
-
-
+def run():
+    app.run_polling()
