@@ -16,10 +16,10 @@ class Completion:
 
     @staticmethod
     def create(
-        systemMessage: str = "You are a helpful assistant",
+        systemMessage: str = "",
         prompt: str = "",
         parentMessageId: str = "",
-        presence_penalty: float = 1,
+        presence_penalty: float = 0.2,
         temperature: float = 1,
         model: str = "gpt-3.5-turbo",
     ):
