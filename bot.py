@@ -45,5 +45,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             print("text: ", text, "prev: ", msg.text)
 
 app.add_handler(MessageHandler(None, echo))
+
 def run():
     app.run_polling()
+
+if __name__ == "__main__":
+    run()
