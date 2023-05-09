@@ -31,24 +31,21 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     prev_text_len = 0
     i = 0
     # f'Мое имя: {update.effective_user.first_name}\nМое сообщение: ' + update.message.text
-    for token in theb.Completion.create(update.message.text):
-        text += token
-        print(token)
-        if i % 15 == 0:
-            try:
-                msg = await msg.edit_text(text)
-            except Exception:
-                print("ss")
-        i += 1
-    if len(msg.text) != len(text):
-        try:
-            await msg.edit_text(text)
-        except Exception:
-            print("text: ", text, "prev: ", msg.text)
+    # for token in theb.Completion.create(update.message.text):
+    #     text += token
+    #     print(token)
+    #     if i % 15 == 0:
+    #         try:
+    #             msg = await msg.edit_text(text)
+    #         except Exception:
+    #             print("ss")
+    #     i += 1
+    # if len(msg.text) != len(text):
+    #     try:
+    #         await msg.edit_text(text)
+    #     except Exception:
+    #         print("text: ", text, "prev: ", msg.text)
 
-
-def run():
-    print("fuck")
 
 from flask import Flask
 
@@ -59,7 +56,6 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-if __name__ == "__main__":
-    app = ApplicationBuilder().token(getenv("tg_token")).build()
-    app.add_handler(MessageHandler(None, echo))
-    app.run_polling()
+app = ApplicationBuilder().token(getenv("tg_token")).build()
+app.add_handler(MessageHandler(None, echo))
+app.run_polling()
