@@ -27,24 +27,25 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     msg = await update.message.reply_text("...")
     text = ""
-    prev_text = ""
-    prev_text_len = 0
     i = 0
-    # f'Мое имя: {update.effective_user.first_name}\nМое сообщение: ' + update.message.text
-    # for token in theb.Completion.create(update.message.text):
-    #     text += token
-    #     print(token)
-    #     if i % 15 == 0:
-    #         try:
-    #             msg = await msg.edit_text(text)
-    #         except Exception:
-    #             print("ss")
-    #     i += 1
-    # if len(msg.text) != len(text):
-    #     try:
-    #         await msg.edit_text(text)
-    #     except Exception:
-    #         print("text: ", text, "prev: ", msg.text)
+    result = theb.Completion.create(
+        update.message.text,
+        parent_message_id=message_id[update.effective_chat.id] if update.effective_chat.id in message_id else ""
+    )
+    message_id[update.effective_chat.id] = next(result)['id']
+    for data in result:
+        text += data['delta']
+        if i % 20 == 0:
+            try:
+                msg = await msg.edit_text(text)
+            except Exception:
+                print("Error = " + Exception)
+        i += 1
+    if len(msg.text) != len(text):
+        try:
+            await msg.edit_text(text)
+        except Exception:
+            print("text: ", text, "prev: ", msg.text)
 
 
 if __name__ == "__main__":
