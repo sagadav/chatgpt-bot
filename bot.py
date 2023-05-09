@@ -3,12 +3,14 @@ from gpt4free import usesless
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler
 from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
-
-app = ApplicationBuilder().token(getenv("tg_token")).build()
 
 from gpt4free import theb
 message_id = {}
@@ -44,10 +46,20 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         except Exception:
             print("text: ", text, "prev: ", msg.text)
 
-app.add_handler(MessageHandler(None, echo))
 
 def run():
-    app.run_polling()
+    print("fuck")
+
+from flask import Flask
+
+fapp = Flask(__name__)
+
+@fapp.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+
 
 if __name__ == "__main__":
-    run()
+    app = ApplicationBuilder().token(getenv("tg_token")).build()
+    app.add_handler(MessageHandler(None, echo))
+    app.run_polling()

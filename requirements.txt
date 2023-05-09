@@ -12,3 +12,5 @@ pydantic
 pymailtm
 python-telegram-bot==20.2
 gunicorn
+python-dotenv
+flask
