@@ -2,7 +2,7 @@ from time import sleep
 from gpt4free import usesless
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler
-from os import getenv
+from os import getenv, open
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -47,15 +47,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     #         print("text: ", text, "prev: ", msg.text)
 
 
-from flask import Flask
-
-fapp = Flask(__name__)
-
-@fapp.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
-app = ApplicationBuilder().token(getenv("tg_token")).build()
-app.add_handler(MessageHandler(None, echo))
-app.run_polling()
+if __name__ == "__main__":
+    app = ApplicationBuilder().token(getenv("tg_token")).build()
+    app.add_handler(MessageHandler(None, echo))
+    app.run_polling()
